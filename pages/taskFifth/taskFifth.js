@@ -1,5 +1,7 @@
-// Реализовать 10 карточек с числами от 0 до 9 и при нажатии на какую-либо карточку присвоить ей класс active.
-// В классе active должны быть стили, которые меняют цвет текста и цвет заднего фона местами.
+// Есть массив из объектов. Каждый объект имеет свойства en и ru. В свойстве en написано слово на английском, а в свойстве ru на русском.
+// Необходимо реализовать карточки, при нажатии на которые слова с русского меняются на английский и обратно.
+// Подсказка. В каждой карточке должно быть два параграфа.
+// В одном написано на русском, а во втором на английском и при нажатии на карточку один параграф получает класс с display none а второй с display block.
 
 document.body.style.position = "relative";
 document.body.style.backgroundColor = "#f5fffa";
@@ -9,6 +11,7 @@ buttonUp.classList.add("buttonUp");
 document.body.append(buttonUp);
 buttonUp.innerText = "UP";
 buttonUp.style.position = "fixed";
+buttonUp.style.zIndex = "10";
 buttonUp.style.left = "95%";
 buttonUp.style.top = "90%";
 buttonUp.style.borderRadius = "50%";
@@ -24,7 +27,7 @@ buttonPrevious.classList.add("button");
 buttonPrevious.innerText = "previous page";
 buttonPrevious.setAttribute(
     "onclick",
-    "document.location='/pages/taskFirst/taskFirst.html'"
+    "document.location='/pages/taskFourth/taskFourth.html'"
 );
 navButtons.append(buttonPrevious);
 buttonPrevious.style.margin = "10px auto";
@@ -41,14 +44,14 @@ buttonNext.classList.add("button");
 buttonNext.innerText = "next page";
 buttonNext.setAttribute(
     "onclick",
-    "document.location='/pages/taskThird/taskThird.html'"
+    "document.location='/pages/taskSixth/taskSixth.html'"
 );
 navButtons.append(buttonNext);
 buttonNext.style.margin = "10px auto";
 
 let title = document.createElement("h1");
 title.classList.add("title");
-title.innerText = "Second task:";
+title.innerText = "Fifth task:";
 document.body.append(title);
 title.style.textAlign = "center";
 title.style.color = "black";
@@ -56,7 +59,7 @@ title.style.color = "black";
 let paragraphTask = document.createElement("p");
 paragraphTask.classList.add("paragraphTask");
 paragraphTask.innerText =
-    " Реализовать 10 карточек с числами от 0 до 9 и при нажатии на какую-либо карточку присвоить ей класс active. В классе active должны быть стили, которые меняют цвет текста и цвет заднего фона местами.";
+    "Есть массив из объектов. Каждый объект имеет свойства en и ru. В свойстве en написано слово на английском, а в свойстве ru на русском. Необходимо реализовать карточки, при нажатии на которые слова с русского меняются на английский и обратно. Подсказка. В каждой карточке должно быть два параграфа. В одном написано на русском, а во втором на английском и при нажатии на карточку один параграф получает класс с display none а второй с display block.";
 document.body.append(paragraphTask);
 paragraphTask.style.width = "75%";
 paragraphTask.style.margin = "10px auto";
@@ -71,6 +74,7 @@ divButtons.classList.add("divButtons");
 document.body.append(divButtons);
 divButtons.style.display = "flex";
 divButtons.style.justifyContent = "center";
+divButtons.style.flexWrap = "wrap";
 
 let buttonCreate = document.createElement("button");
 buttonCreate.classList.add("button");
@@ -80,33 +84,38 @@ buttonCreate.style.margin = "20px";
 buttonCreate.style.backgroundColor = "mediumseagreen";
 buttonCreate.style.borderRadius = "5px";
 
-let buttonReset = document.createElement("button");
-buttonReset.classList.add("button");
-divButtons.append(buttonReset);
-buttonReset.innerText = "Reset!";
-buttonReset.style.margin = "20px";
-buttonReset.style.backgroundColor = "mediumvioletred";
-buttonReset.style.borderRadius = "5px";
-
-let buttonKill = document.createElement("button");
-buttonKill.classList.add("buttonKill");
-divButtons.append(buttonKill);
-buttonKill.innerText = "Kill all!";
-buttonKill.style.margin = "20px";
-buttonKill.style.backgroundColor = "red";
-buttonKill.style.borderRadius = "5px";
-
 let divElements = document.createElement("div");
 divElements.classList.add("divElements");
 document.body.append(divElements);
 divElements.style.border = "2px solid black";
 divElements.style.margin = "10px auto";
-divElements.style.width = "75%";
 divElements.style.borderRadius = "5px";
 divElements.style.display = "flex";
 divElements.style.justifyContent = "space-evenly";
 divElements.style.flexWrap = "wrap";
 divElements.style.alignContent = "space-around";
+divElements.style.position = "relative";
+
+let divPseudo = document.createElement("div");
+divPseudo.classList.add("divPseudo");
+document.body.append(divPseudo);
+divPseudo.style.margin = "10px auto";
+divPseudo.style.height = "60px";
+
+const arrWords = [
+    { en: "serendipity", ru: "случайная удача" },
+    { en: "luminous", ru: "светящийся, яркий" },
+    { en: "mellifluous", ru: "медовый, нежный" },
+    { en: "effervescent", ru: "искрящийся, бодрящий" },
+    { en: "ethereal", ru: "эфирный, неземной" },
+    { en: "ephemeral", ru: "кратковременный, временный" },
+    { en: "enamored", ru: "влюбленный, завороженный" },
+    { en: "whimsical", ru: "вдохновленный, фантастический" },
+    { en: "mellifluent", ru: "распутный, гладкий" },
+    { en: "radiant", ru: "сияющий, испускающий свет" },
+    { en: "enraptured", ru: "восхищенный, очарованный" },
+    { en: "resplendent", ru: "великолепный, блестящий" },
+];
 
 let arrBackColor = [
     "#9B4ABF",
@@ -119,6 +128,8 @@ let arrBackColor = [
     "#0B30EF",
     "#98F050",
     "#0C3D4A",
+    "#142F63",
+    "#DFA392",
 ];
 
 let arrColor = [
@@ -132,54 +143,46 @@ let arrColor = [
     "#21F020",
     "#0F3782",
     "#72D00E",
+    "#ED6E02",
+    "#744683",
 ];
 
 function create() {
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < arrWords.length; i++) {
         let cardDiv = document.createElement("div");
-        cardDiv.innerText = i;
-        cardDiv.style.width = "15%";
+        cardDiv.innerText = arrWords[i].en;
+        cardDiv.style.width = "23%";
         cardDiv.style.height = "75px";
-        cardDiv.style.margin = "10px auto";
-        cardDiv.style.padding = "10px";
+        cardDiv.style.margin = "5px auto";
+        cardDiv.style.padding = "5px";
         cardDiv.style.textAlign = "center";
         cardDiv.style.fontFamily = "Gilroy";
         cardDiv.style.fontWeight = "bold";
-        cardDiv.style.fontSize = "30px";
+        cardDiv.style.fontSize = "23px";
         cardDiv.style.display = "flex";
         cardDiv.style.alignItems = "center";
         cardDiv.style.justifyContent = "center";
+        cardDiv.style.border = "2px solid #553f2d";
+        cardDiv.style.borderRadius = "5px";
         cardDiv.style.color = arrColor[i];
         cardDiv.style.backgroundColor = arrBackColor[i];
-        cardDiv.style.border = "2px solid";
-        cardDiv.style.borderColor = arrColor[i];
-        cardDiv.style.borderRadius = "5px";
         cardDiv.addEventListener("click", function () {
-            cardDiv.classList.add("active");
-            cardDiv.style.color = arrBackColor[i];
-            cardDiv.style.backgroundColor = arrColor[i];
-            cardDiv.style.borderColor = arrBackColor[i];
+            if (cardDiv.innerText === arrWords[i].en) {
+                cardDiv.innerText = arrWords[i].ru;
+                cardDiv.style.color = arrBackColor[i];
+                cardDiv.style.borderColor = arrBackColor[i];
+                cardDiv.style.backgroundColor = arrColor[i];
+                cardDiv.style.overflow = "hidden";
+            } else {
+                cardDiv.innerText = arrWords[i].en;
+                cardDiv.style.color = arrColor[i];
+                cardDiv.style.borderColor = arrColor[i];
+                cardDiv.style.backgroundColor = arrBackColor[i];
+            }
         });
         divElements.append(cardDiv);
     }
-    divElements.scrollIntoView({ block: "nearest", behavior: "smooth" });
-}
-
-function reset() {
-    let x = divElements.querySelectorAll("div");
-    for (let i = 0; i < x.length; i++) {
-        x[i].classList = "";
-        x[i].style.color = arrColor[i];
-        x[i].style.backgroundColor = arrBackColor[i];
-        x[i].style.borderColor = arrColor[i];
-    }
-}
-
-function kill() {
-    let x = divElements.querySelectorAll("div");
-    for (let i = 0; i < x.length; i++) {
-        x[i].remove(i);
-    }
+    document.body.scrollIntoView({ block: "end", behavior: "smooth" });
 }
 
 function upScroll() {
@@ -187,6 +190,4 @@ function upScroll() {
 }
 
 buttonCreate.addEventListener("click", create, { once: true });
-buttonReset.addEventListener("click", reset);
-buttonKill.addEventListener("click", kill);
 buttonUp.addEventListener("click", upScroll);

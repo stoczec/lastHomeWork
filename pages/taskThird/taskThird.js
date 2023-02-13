@@ -1,6 +1,4 @@
-// Написать программу, которая формирует на основе массива строк множество параграфов
-// и выводит их в интерфейс. При клике на параграф текст должен меняться на звездочки.
-// На данном этапе делать процесс обратимым при повторном клике необязательно.
+// Доработать прошлый скрипт таким образом, чтобы при повторном нажатии класс active удалялся.
 
 document.body.style.position = "relative";
 document.body.style.backgroundColor = "#f5fffa";
@@ -23,7 +21,10 @@ navButtons.style.justifyContent = "center";
 let buttonPrevious = document.createElement("button");
 buttonPrevious.classList.add("button");
 buttonPrevious.innerText = "previous page";
-buttonPrevious.setAttribute("onclick", "document.location='/index.html'");
+buttonPrevious.setAttribute(
+    "onclick",
+    "document.location='/pages/taskSecond/taskSecond.html'"
+);
 navButtons.append(buttonPrevious);
 buttonPrevious.style.margin = "10px auto";
 
@@ -39,14 +40,14 @@ buttonNext.classList.add("button");
 buttonNext.innerText = "next page";
 buttonNext.setAttribute(
     "onclick",
-    "document.location='/pages/taskSecond/taskSecond.html'"
+    "document.location='/pages/taskFourth/taskFourth.html'"
 );
 navButtons.append(buttonNext);
 buttonNext.style.margin = "10px auto";
 
 let title = document.createElement("h1");
 title.classList.add("title");
-title.innerText = "First task:";
+title.innerText = "Third task:";
 document.body.append(title);
 title.style.textAlign = "center";
 title.style.color = "black";
@@ -54,7 +55,7 @@ title.style.color = "black";
 let paragraphTask = document.createElement("p");
 paragraphTask.classList.add("paragraphTask");
 paragraphTask.innerText =
-    " Написать программу, которая формирует на основе массива строк множество параграфов и выводит их в интерфейс. При клике на параграф текст должен меняться на звездочки. На данном этапе делать процесс обратимым при повторном клике необязательно.";
+    "Доработать прошлый скрипт таким образом, чтобы при повторном нажатии класс active удалялся.";
 document.body.append(paragraphTask);
 paragraphTask.style.width = "75%";
 paragraphTask.style.margin = "10px auto";
@@ -101,57 +102,87 @@ divElements.style.border = "2px solid black";
 divElements.style.margin = "10px auto";
 divElements.style.width = "75%";
 divElements.style.borderRadius = "5px";
-divElements.style.backgroundColor = "#f7f6f4";
+divElements.style.display = "flex";
+divElements.style.justifyContent = "space-evenly";
+divElements.style.flexWrap = "wrap";
+divElements.style.alignContent = "space-around";
 
-let array = [
-    "border-collapse - устанавливает, как отображать границы вокруг ячеек таблицы.",
-    "text-decoration - добавляет оформление текста в виде его подчеркивания, перечеркивания, линии над текстом и мигания.",
-    "right - для позиционированного элемента определяет расстояние от правого края родительского элемента, не включая отступ, поле и ширину рамки, до правого края дочернего элемента.",
-    "overflow - управляет отображением содержания блочного элемента, если оно целиком не помещается и выходит за область заданных размеров.",
-    "padding - устанавливает значение полей вокруг содержимого элемента.",
-    "font-size - определяет размер шрифта элемента.",
-    "list-style - универсальное свойство, позволяющее одновременно задать стиль маркера, его положение, а также изображение, которое будет использоваться в качестве маркера.",
+let arrBackColor = [
+    "#9B4ABF",
+    "#09017A",
+    "#8AD53A",
+    "#E4DE41",
+    "#88E0C8",
+    "#C28FB7",
+    "#F8C8B6",
+    "#0B30EF",
+    "#98F050",
+    "#0C3D4A",
 ];
+
 let arrColor = [
-    "mediumaquamarine",
-    "#008cc1",
-    "#f36196",
-    "#fed200",
-    "#9f0000",
-    "#74c365",
-    "#220099",
+    "#69FAFC",
+    "#97A7A9",
+    "#242DF8",
+    "#A36366",
+    "#8208E0",
+    "#6F030F",
+    "#8107EA",
+    "#21F020",
+    "#0F3782",
+    "#72D00E",
 ];
+
 function create() {
-    for (let i = 0; i < array.length; i++) {
-        let paragraph = document.createElement("p");
-        paragraph.innerText = array[i];
-        paragraph.style.margin = "0px auto";
-        paragraph.style.padding = "10px";
-        paragraph.style.borderBottom = "1px dotted black";
-        paragraph.style.textAlign = "center";
-        paragraph.style.fontFamily = "Gilroy";
-        paragraph.style.color = arrColor[i];
-        paragraph.addEventListener("click", function () {
-            if (paragraph.innerText === array[i]) {
-                paragraph.innerText = "***";
+    for (let i = 0; i < 10; i++) {
+        let cardDiv = document.createElement("div");
+        cardDiv.innerText = i;
+        cardDiv.style.width = "15%";
+        cardDiv.style.height = "75px";
+        cardDiv.style.margin = "10px auto";
+        cardDiv.style.padding = "10px";
+        cardDiv.style.textAlign = "center";
+        cardDiv.style.fontFamily = "Gilroy";
+        cardDiv.style.fontWeight = "bold";
+        cardDiv.style.fontSize = "30px";
+        cardDiv.style.display = "flex";
+        cardDiv.style.alignItems = "center";
+        cardDiv.style.justifyContent = "center";
+        cardDiv.style.color = arrColor[i];
+        cardDiv.style.backgroundColor = arrBackColor[i];
+        cardDiv.style.border = "2px solid";
+        cardDiv.style.borderColor = arrColor[i];
+        cardDiv.style.borderRadius = "5px";
+        cardDiv.addEventListener("click", function () {
+            if (cardDiv.classList.contains("active")) {
+                cardDiv.classList.remove("active");
+                cardDiv.style.color = arrColor[i];
+                cardDiv.style.backgroundColor = arrBackColor[i];
+                cardDiv.style.borderColor = arrColor[i];
             } else {
-                paragraph.innerText = array[i];
+                cardDiv.classList.add("active");
+                cardDiv.style.color = arrBackColor[i];
+                cardDiv.style.backgroundColor = arrColor[i];
+                cardDiv.style.borderColor = arrBackColor[i];
             }
         });
-        divElements.append(paragraph);
+        divElements.append(cardDiv);
     }
     divElements.scrollIntoView({ block: "nearest", behavior: "smooth" });
 }
 
 function reset() {
-    let x = divElements.querySelectorAll("p");
+    let x = divElements.querySelectorAll("div");
     for (let i = 0; i < x.length; i++) {
-        x[i].innerText = array[i];
+        x[i].classList = "";
+        x[i].style.color = arrColor[i];
+        x[i].style.backgroundColor = arrBackColor[i];
+        x[i].style.borderColor = arrColor[i];
     }
 }
 
 function kill() {
-    let x = divElements.querySelectorAll("p");
+    let x = divElements.querySelectorAll("div");
     for (let i = 0; i < x.length; i++) {
         x[i].remove(i);
     }
@@ -161,7 +192,7 @@ function upScroll() {
     document.body.scrollIntoView({ block: "start", behavior: "smooth" });
 }
 
-buttonCreate.addEventListener("click", create);
+buttonCreate.addEventListener("click", create, { once: true });
 buttonReset.addEventListener("click", reset);
 buttonKill.addEventListener("click", kill);
 buttonUp.addEventListener("click", upScroll);
