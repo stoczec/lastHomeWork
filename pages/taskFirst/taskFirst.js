@@ -23,14 +23,14 @@ navButtons.style.justifyContent = "center";
 let buttonPrevious = document.createElement("button");
 buttonPrevious.classList.add("button");
 buttonPrevious.innerText = "previous page";
-buttonPrevious.setAttribute("onclick", "document.location='/index.html'");
+buttonPrevious.setAttribute("onclick", "document.location='../index.html'");
 navButtons.append(buttonPrevious);
 buttonPrevious.style.margin = "10px auto";
 
 let buttonHome = document.createElement("button");
 buttonHome.classList.add("button");
 buttonHome.innerText = "home page";
-buttonHome.setAttribute("onclick", "document.location='/index.html'");
+buttonHome.setAttribute("onclick", "document.location='../index.html'");
 navButtons.append(buttonHome);
 buttonHome.style.margin = "10px auto";
 
@@ -39,7 +39,7 @@ buttonNext.classList.add("button");
 buttonNext.innerText = "next page";
 buttonNext.setAttribute(
     "onclick",
-    "document.location='/pages/taskSecond/taskSecond.html'"
+    "document.location='./pages/taskSecond/taskSecond.html'"
 );
 navButtons.append(buttonNext);
 buttonNext.style.margin = "10px auto";
